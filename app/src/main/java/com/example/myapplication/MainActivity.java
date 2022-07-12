@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +26,40 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
+    FrameLayout mainFrame;
     Button authBtn;
     LinearLayout mainLinearLayout;
     static String message;
+    static FragmentManager fm;
+
+    public static void changeFragment(Fragment fragment){
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.mainFrame, fragment).commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainFrame = findViewById(R.id.mainFrame);
+        fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.add(R.id.mainFrame, new StartFragment()).commit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         authBtn = findViewById(R.id.authBtn);
         mainLinearLayout = findViewById(R.id.mainLinearLayout);
         authBtn.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +187,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
     }
 }
